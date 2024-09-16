@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  frameUrl: 'http://localhost:4200',
+  frameUrl: 'PUT_PATH_TO_FRAME_HERE',
 };
