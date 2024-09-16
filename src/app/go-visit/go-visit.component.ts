@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavigationEnd, Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { environment } from '@environment';
+
+console.log({ environment });
 
 @Component({
   selector: 'app-go-visit',
@@ -14,13 +17,20 @@ export class GoVisitComponent implements AfterViewInit {
 
   height = '100%';
   private subscription?: Subscription;
+  private readonly frameUrl = environment.frameUrl;
 
   constructor(
     private readonly router: Router,
     private readonly sanitizer: DomSanitizer
   ) {}
 
+  getSourceUrl(): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(environment.frameUrl);
+  }
+
   ngAfterViewInit(): void {
+    this.iframe.nativeElement.src = environment.frameUrl;
+    // console.log(this.iframe.nativeElement.src);
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.notifyRoute();
