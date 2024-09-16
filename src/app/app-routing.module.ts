@@ -8,9 +8,9 @@ const routes: Routes = [
     component: HomepageComponent,
   },
   {
-    path: 'govisit',
+    path: 'inner',
     loadChildren: () =>
-      import('./go-visit/go-visit.module').then((m) => m.GoVisitModule),
+      import('./inner/inner.module').then((m) => m.InnerModule),
   },
 ];
 

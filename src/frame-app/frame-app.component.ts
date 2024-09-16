@@ -5,8 +5,7 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { NavigationEnd, Route, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -47,7 +46,7 @@ export class FrameAppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.iframe.nativeElement.src = this.frameUrl + this.normatlizedUrl;
+    this.iframe.nativeElement.src = this.frameUrl + this.normalizedUrl;
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.notifyRoute();
@@ -81,14 +80,14 @@ export class FrameAppComponent implements AfterViewInit {
     this.subscription?.unsubscribe();
   }
 
-  get normatlizedUrl() {
+  get normalizedUrl() {
     return this.router.url.replace(new RegExp(`^\/?${this.appPrefix}`), '');
   }
 
   notifyRoute() {
     this.send({
       type: 'route-changed',
-      route: this.normatlizedUrl,
+      route: this.normalizedUrl,
     });
   }
 
