@@ -21,7 +21,7 @@ jobs:
         run: yarn install --frozen-lockfile --non-interactive
 
       - name: Build
-        run: yarn build --base-href=/ng-host-demo/
+        run: yarn build --base-href=/ng-iframe-connect-external/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
