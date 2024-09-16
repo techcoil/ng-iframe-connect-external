@@ -10,7 +10,7 @@ JS
 
 node -e "$script" > src/environment/environment.ts
 
-echo "Building with environment: \n$(cat src/environment/environment.ts)"
+echo "Building with environment: $(cat src/environment/environment.ts)"
 
-yarn install --frozen-lockfile --non-interactive
+yarn install --frozen-lockfile --non-interactive --production=false
 yarn build
